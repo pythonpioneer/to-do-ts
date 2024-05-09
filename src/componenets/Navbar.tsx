@@ -15,6 +15,11 @@ const Navbar: React.FC<NavbarProps> = () => {
                 <a className="navbar-brand" href="#" style={{ fontWeight: 'bold' }}>
                     Navbar
                 </a>
+
+                {/* to add new task */}
+                <a className="float-right" href="#">
+                    Add Task
+                </a>
             </nav>
         </>
     );
