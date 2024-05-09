@@ -1,7 +1,6 @@
 ### Features of to-do application
 
 - to add a task
-- to update the task
 - read the task
 - delete the task
 
@@ -14,6 +13,7 @@
 
 ### Not included features
 
+- Not updated the task
 - login not required
 - signup not required
 - Security not included
