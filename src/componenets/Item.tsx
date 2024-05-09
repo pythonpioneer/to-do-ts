@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 
 // props for task items
@@ -31,4 +31,4 @@ const Item: React.FC<TaskItemProps> = (props) => {
     );
 };
 
-export default Item;
+export default memo(Item);
