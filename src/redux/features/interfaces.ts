@@ -10,14 +10,18 @@ interface ToDo {
     userId: UserId;
 }
 
-// creating the interface to structure the todo state
-interface ToDoState {
+// creating the primary state structure which holds only todo and total
+interface PrimaryToDoState {
     todos: ToDo[];
     total: number;
+}
+
+// creating the interface to structure the todo state
+interface ToDoState extends PrimaryToDoState {
     isLoading: boolean;
     hasError: boolean;
 }
 
 
 // now export all the available interfaces
-export type { ToDo, ToDoState, ToDoId, UserId };
+export type { ToDo, PrimaryToDoState, ToDoState, ToDoId, UserId };

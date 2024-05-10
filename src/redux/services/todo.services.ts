@@ -1,24 +1,31 @@
 // importing all requirements
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API_URL } from '.';
-import { ToDo, ToDoState } from '../features/interfaces';
+import { PrimaryToDoState } from '../features/interfaces';
 
 
 // create a reducer to fetch all the todos
-export const fetchAllToDos = createAsyncThunk<ToDo[]>('todos/fetch', async () => {
+export const fetchAllToDos = createAsyncThunk<PrimaryToDoState>('todos/fetch', async () => {
     try {
-        // Fetch todos from the API
-        const response = await fetch('https://dummyjson.com/todos');
-        if (!response.ok) {
-            throw new Error('Failed to fetch todos');
-        }
+
+        // API to make the request to fetch all notes, (offset based pagination enabled) (default pagination values passed/not required)
+        const url = `${API_URL}/todos`;
+        
+        // now, make the request and fetch todos
+        const response = await fetch(url);
+
+        // handling non-ok responses
+        if (!response.ok) throw new Error('Failed to fetch todos');
+
+        // now, parse the response as json and return the required data type
         const data = await response.json();
-        console.log("xxx")
-        return data.todos;
+        return { todos: data.todos, total: data.total };
 
     } catch (error) {
-        console.error("Error (todos/fetch): ", error);
-        throw error; // Rethrow the error to be handled by Redux Toolkit
+
+        // when encountered errors
+        console.error("Error(todos/fetch): ", error);
+        throw error;
     }
 });
 

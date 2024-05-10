@@ -3,6 +3,7 @@ import Item from "./Item";
 import todos from "../utils/todo.json";
 import { useDispatch } from "react-redux";
 import { fetchAllToDos } from "../redux/services/todo.services";
+import { ToDo } from "../redux/features/interfaces";
 
 // creating a container to manage every todos
 const Container: React.FC = () => {
@@ -17,8 +18,9 @@ const Container: React.FC = () => {
         chunkedTodos.push(todos.slice(i, i + 3));
     }
 
+    // to fetch all todos
     useEffect(() => {
-        dispatch(fetchAllToDos());
+        dispatch(fetchAllToDos() as any);
     }, [dispatch]);
 
     return (
