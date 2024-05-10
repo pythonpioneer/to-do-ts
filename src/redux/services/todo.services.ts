@@ -9,7 +9,7 @@ export const fetchAllToDos = createAsyncThunk<PrimaryToDoState>('todos/fetch', a
     try {
 
         // API to make the request to fetch all notes, (offset based pagination enabled) (default pagination values passed/not required)
-        const url = `${API_URL}/todos`;
+        const url = `${API_URL}/todos?limit=0`;
         
         // now, make the request and fetch todos
         const response = await fetch(url);
