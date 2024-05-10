@@ -26,3 +26,7 @@
 - title
 - desc
 - isCompleted
+
+> Following this documentation for the dummy API 
+
+    https://dummyjson.com/docs/todos
