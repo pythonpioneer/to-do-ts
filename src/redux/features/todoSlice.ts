@@ -1,6 +1,7 @@
 // importing all requirements
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ToDo, ToDoState, ToDoId } from "./interfaces";
+import { fetchAllToDos } from "../services/todo.services";
 
 
 // create the initial global state for the todo
@@ -33,7 +34,12 @@ const ToDoSlice = createSlice({
         },
     },
     extraReducers: builder => {  
-
+        builder
+            // to fetch all todos
+            .addCase(fetchAllToDos.fulfilled, (state, action) => {
+                console.log("sss")
+                console.log(action.payload)
+            })
     }
 });
 
