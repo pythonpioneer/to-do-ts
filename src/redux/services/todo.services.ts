@@ -1,7 +1,7 @@
 // importing all requirements
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API_URL } from '.';
-import { PrimaryToDoState, ToDoId } from '../features/interfaces';
+import { PrimaryToDoState, ToDo, ToDoId } from '../features/interfaces';
 
 
 // create a reducer to fetch all the todos
@@ -17,7 +17,7 @@ const fetchAllToDos = createAsyncThunk<PrimaryToDoState>('todos/fetch', async ()
         // handling non-ok responses
         if (!response.ok) throw new Error('Failed to fetch todos');
 
-        // now, parse the response as json and return the required data type
+        // now, parse the response as json and return the required data
         const data = await response.json();
         return { todos: data.todos, total: data.total };
 
@@ -47,7 +47,7 @@ const deleteToDo = createAsyncThunk<ToDoId, ToDoId>('todo/delete', async (id: To
         const response = await fetch(url, config);  // is await compulsory here? yes, because we are checking response.ok, so response is important, so await
 
         // handling non-ok responses
-        if (!response.ok) throw new Error('Failed to fetch todos');
+        if (!response.ok) throw new Error('Failed to delete');
 
         // if this work
         return id;
@@ -59,6 +59,43 @@ const deleteToDo = createAsyncThunk<ToDoId, ToDoId>('todo/delete', async (id: To
         throw error;
     }
 });
+
+
+// to update the existing todos
+const updateToDo = createAsyncThunk<ToDo, ToDo>('todo/update', async (todo: ToDo) => {
+    try {
+        // api to make the delete request
+        const url = `${API_URL}/todos/${todo.id}`;
+
+        const config = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(todo),
+        }
+
+        // now, make the api call to update the todo
+        const response = await fetch(url, config);
+
+        // handling non-ok responses
+        if (!response.ok) throw new Error('Failed to update');
+
+        // now, parse the response as json and return the required data
+        const data = await response.json();
+
+        // -------------------------- update later
+        console.log(data);
+        return data;
+
+    } catch (error) {
+
+        // when encountered errors
+        console.error("Error(todos/fetch): ", error);
+        throw error;
+    }
+});
+
 
 
 // export all the availbale todos
