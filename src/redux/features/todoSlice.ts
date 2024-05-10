@@ -1,6 +1,6 @@
 // importing all requirements
-import { createSlice } from "@reduxjs/toolkit";
-import { ToDoState } from "./interfaces";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ToDo, ToDoState } from "./interfaces";
 
 
 // create the initial global state for the todo
@@ -18,6 +18,16 @@ const ToDoSlice = createSlice({
     initialState,
     reducers: {
 
+        // adding a new todo on the top of other todos, also increment the total.
+        addToDo: (state, action: PayloadAction<ToDo>) => {
+            state.todos = [ action.payload, ...state.todos ];
+            state.total += 1;
+        },
+
+        // remove a todo, also decrement the total
+        removeToDo: (state, action: PayloadAction<number>) => {
+            
+        }
     },
     extraReducers: builder => {  
 
