@@ -1,6 +1,6 @@
 // importing all requirements
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ToDo, ToDoState } from "./interfaces";
+import { ToDo, ToDoState, ToDoId } from "./interfaces";
 
 
 // create the initial global state for the todo
@@ -25,9 +25,12 @@ const ToDoSlice = createSlice({
         },
 
         // remove a todo, also decrement the total
-        removeToDo: (state, action: PayloadAction<number>) => {
-            
-        }
+        removeToDo: (state, action: PayloadAction<ToDoId>) => {
+
+            // find the todo by the todo id and remove it
+            state.todos = state.todos.filter(todo => todo.id !== action.payload);
+            state.total -= 1;
+        },
     },
     extraReducers: builder => {  
 
