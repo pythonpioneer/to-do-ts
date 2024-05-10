@@ -1,8 +1,18 @@
 // importing requirements
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 // form to add todo
 const AddToDo: React.FC = () => {
+
+    // handle the prev page 
+    const navigate = useNavigate();
+    const goToPrevPage = () => {
+        navigate(-1);
+    }
+
+
     return (
         <>
             <form>
@@ -14,7 +24,7 @@ const AddToDo: React.FC = () => {
 
                     <div className="d-flex justify-content-between">
                         {/* back to prev page */}
-                        <button type="button" className="btn btn-primary">
+                        <button type="button" className="btn btn-primary" onClick={goToPrevPage}>
                             Back
                         </button>
 
