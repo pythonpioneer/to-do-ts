@@ -1,4 +1,4 @@
-// creating types for every structure to improve readablity
+// creating types to improve readablity
 type ToDoId = number;
 type UserId = number;
 
