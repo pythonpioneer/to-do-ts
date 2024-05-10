@@ -23,6 +23,8 @@ const Container: React.FC = () => {
         dispatch(fetchAllToDos() as any);
     }, [dispatch, fetchAllToDos]);
 
+    console.log("container")
+
     return (
         <>
             <div className="container mt-4">
@@ -31,7 +33,7 @@ const Container: React.FC = () => {
                     <div key={rowIndex} className="row">
 
                         {row.map((task, index) => (
-                            <div key={task.id + index} className="col">
+                            <div key={task.id} className="col">
                                 <Item id={task.id} todo={task.todo} completed={task.completed} userId={task.userId} />
                             </div>
                         ))}

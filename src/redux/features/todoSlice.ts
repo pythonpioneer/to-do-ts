@@ -1,7 +1,7 @@
 // importing all requirements
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ToDo, ToDoState, ToDoId, PrimaryToDoState } from "./interfaces";
-import { fetchAllToDos } from "../services/todo.services";
+import { deleteToDo, fetchAllToDos } from "../services/todo.services";
 
 
 // create the initial global state for the todo
@@ -41,6 +41,19 @@ const ToDoSlice = createSlice({
                 // set todos to the todos array
                 state.todos = action.payload.todos;
                 state.total = state.todos.length;
+            })
+
+            // to delete the todo
+            .addCase(deleteToDo.fulfilled, (state, action: PayloadAction<ToDoId>) => {
+
+                // pass the necessary values to delete the todo
+                const id = action.payload;
+
+                // this is also a way!!
+                ToDoSlice.caseReducers.removeToDo(state, {
+                    payload: id,
+                    type: ""
+                });
             })
     }
 });
