@@ -1,18 +1,12 @@
 import React, { memo } from "react";
+import { ToDo } from "../redux/features/interfaces";
 
-
-// props for task items
-interface TaskItemProps {
-    title: string;
-    desc: string;
-    isCompleted: boolean;
-}
 
 // the componenet represent individual todo
-const Item: React.FC<TaskItemProps> = (props) => {
+const Item: React.FC<ToDo> = (props) => {
 
     // fetch all props values
-    const { title="No Title", desc="No Desc", isCompleted=false } = props;
+    const { todo, completed } = props;
 
     return (
         <>
@@ -21,17 +15,17 @@ const Item: React.FC<TaskItemProps> = (props) => {
 
                     <i className="fa-solid fa-trash float-right"></i>
                     <div className="d-flex">
-                        <h5 className="card-title">{title}</h5>
-                        <i className="fa-solid fa-circle-check mt-1 ml-2" style={{ color: isCompleted ? 'green' : 'orange' }}></i>
+                        <h5 className="card-title">{todo?.split(' ')[0]}</h5>
+                        <i className="fa-solid fa-circle-check mt-1 ml-2" style={{ color: completed ? 'green' : 'orange' }}></i>
                     </div>
 
                     <p className="card-text">
-                        {desc}
+                        {todo}
                     </p>
                     <i className="fa-solid fa-square-pen float-right"></i>
 
                     {/* if task is not completed then show this button */}
-                    {!isCompleted && <button type="button">
+                    {!completed && <button type="button">
                         Mark as Complete
                     </button>}
                 </div>

@@ -5,7 +5,7 @@ import { PrimaryToDoState } from '../features/interfaces';
 
 
 // create a reducer to fetch all the todos
-export const fetchAllToDos = createAsyncThunk<PrimaryToDoState>('todos/fetch', async () => {
+const fetchAllToDos = createAsyncThunk<PrimaryToDoState>('todos/fetch', async () => {
     try {
 
         // API to make the request to fetch all notes, (offset based pagination enabled) (default pagination values passed/not required)
@@ -29,3 +29,6 @@ export const fetchAllToDos = createAsyncThunk<PrimaryToDoState>('todos/fetch', a
     }
 });
 
+
+// export all the availbale todos
+export { fetchAllToDos };

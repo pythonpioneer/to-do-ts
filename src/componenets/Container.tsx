@@ -21,7 +21,7 @@ const Container: React.FC = () => {
     // to fetch all todos
     useEffect(() => {
         dispatch(fetchAllToDos() as any);
-    }, [dispatch]);
+    }, [dispatch, fetchAllToDos]);
 
     return (
         <>
@@ -31,8 +31,8 @@ const Container: React.FC = () => {
                     <div key={rowIndex} className="row">
 
                         {row.map((task, index) => (
-                            <div key={index} className="col">
-                                <Item title={task.todo?.split(' ')[0]} desc={task.todo} isCompleted={task.completed} />
+                            <div key={task.id + index} className="col">
+                                <Item id={task.id} todo={task.todo} completed={task.completed} userId={task.userId} />
                             </div>
                         ))}
 
