@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import Item from "./Item";
-import todos from "../utils/todo.json";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAllToDos } from "../redux/services/todo.services";
-import { ToDo } from "../redux/features/interfaces";
+import { ToDoState } from "../redux/features/interfaces";
+
 
 // creating a container to manage every todos
 const Container: React.FC = () => {
 
-    // to call the actions 
+    // to call the actions and to select states
     const dispatch = useDispatch();
-
+    const { todos } = useSelector((state: { todo: ToDoState }) => state.todo);
 
     // Chunk the todos into groups of three
     const chunkedTodos = [];
@@ -32,7 +32,7 @@ const Container: React.FC = () => {
 
                         {row.map((task, index) => (
                             <div key={index} className="col">
-                                <Item title={task.title} desc={task.desc} isCompleted={task.isCompleted} />
+                                <Item title={task.todo?.split(' ')[0]} desc={task.todo} isCompleted={task.completed} />
                             </div>
                         ))}
 
