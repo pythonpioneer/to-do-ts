@@ -1,7 +1,8 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { ToDo } from "../redux/features/interfaces";
 import { useDispatch } from "react-redux";
 import { deleteToDo } from "../redux/services/todo.services";
+import { markComplete } from "../redux/features/todoSlice";
 
 
 // the componenet represent individual todo
@@ -11,9 +12,18 @@ const Item: React.FC<ToDo> = (props) => {
     const { id, todo, completed } = props;
     const dispatch = useDispatch();
 
+    // to enforce re-render to the component to change the complete status
+    const [ isCompleted, setIsCompleted ] = useState(props.completed);
+
     // to call the delete todo api
     const handleDelete = () => {
         dispatch(deleteToDo(id) as any);
+    }
+
+    // to mark the complete and invert the status
+    const handleComplete = () => {
+        setIsCompleted(!isCompleted);
+        dispatch(markComplete(id));
     }
 
     console.log("xxx")
@@ -29,7 +39,7 @@ const Item: React.FC<ToDo> = (props) => {
                         <h5 className="card-title">{todo?.split(' ')[0]}</h5>
 
                         {/* update icon */}
-                        <i className="fa-solid fa-circle-check mt-1 ml-2" style={{ color: completed ? 'green' : 'orange' }}></i>
+                        <i className="fa-solid fa-circle-check mt-1 ml-2" style={{ color: isCompleted ? 'green' : 'orange' }}></i>
                     </div>
 
                     <p className="card-text">
@@ -38,7 +48,7 @@ const Item: React.FC<ToDo> = (props) => {
                     <i className="fa-solid fa-square-pen float-right"></i>
 
                     {/* if task is not completed then show this button */}
-                    {!completed && <button type="button">
+                    {!isCompleted && <button type="button" onClick={handleComplete}>
                         Mark as Complete
                     </button>}
                 </div>

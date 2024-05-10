@@ -32,6 +32,24 @@ const ToDoSlice = createSlice({
             state.todos = state.todos.filter(todo => todo.id !== action.payload);
             state.total -= 1;
         },
+
+        // to mark the todo as complete, no api provided, operate locally
+        markComplete: (state, action: PayloadAction<ToDoId>) => {
+
+            // find the todo and then mark the complete status as true or false
+            state.todos.map(todo => {
+                if (todo.id !== action.payload) return todo;
+                
+                // now, invert the complete status
+                const updatedToDo = {
+                    ...todo,
+                    completed: !todo.completed,
+                }
+
+                return updatedToDo;
+            })
+        }
+
     },
     extraReducers: builder => {  
         builder
@@ -63,5 +81,6 @@ const ToDoSlice = createSlice({
 export default ToDoSlice.reducer;
 export const { 
     addToDo, 
-    removeToDo
+    removeToDo,
+    markComplete
 } = ToDoSlice.actions;
