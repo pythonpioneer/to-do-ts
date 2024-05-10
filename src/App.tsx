@@ -12,6 +12,9 @@ const App: React.FC = () => {
 					<Navbar />
 					<Container />
 				</>} />
+
+				{/* adding route to update todo */}
+				{/* adding route to add todo */}
 			</Routes>
 		</>
 	);
