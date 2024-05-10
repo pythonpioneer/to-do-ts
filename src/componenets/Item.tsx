@@ -18,13 +18,22 @@ const Item: React.FC<TaskItemProps> = (props) => {
         <>
             <div className="card m-1" style={{ width: "18rem" }}>
                 <div className="card-body">
-                    <h5 className="card-title">{title}</h5>
+
+                    <i className="fa-solid fa-trash float-right"></i>
+                    <div className="d-flex">
+                        <h5 className="card-title">{title}</h5>
+                        <i className="fa-solid fa-circle-check mt-1 ml-2" style={{ color: isCompleted ? 'green' : 'orange' }}></i>
+                    </div>
+
                     <p className="card-text">
                         {desc}
                     </p>
-                    <button type="button">
-                        {isCompleted ? "Delete" : "Mark as Complete"}
-                    </button>
+                    <i className="fa-solid fa-square-pen float-right"></i>
+
+                    {/* if task is not completed then show this button */}
+                    {!isCompleted && <button type="button">
+                        Mark as Complete
+                    </button>}
                 </div>
             </div>
         </>
