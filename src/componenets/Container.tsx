@@ -21,7 +21,7 @@ const Container: React.FC = () => {
     // to fetch all todos
     useEffect(() => {
         dispatch(fetchAllToDos() as any);
-    }, [dispatch, fetchAllToDos]);
+    }, [dispatch]);
 
     console.log("container")
 

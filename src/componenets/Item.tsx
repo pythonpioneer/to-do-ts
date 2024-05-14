@@ -9,7 +9,7 @@ import { markComplete } from "../redux/features/todoSlice";
 const Item: React.FC<ToDo> = (props) => {
 
     // fetch all props values
-    const { id, todo, completed } = props;
+    const { id, todo } = props;
     const dispatch = useDispatch();
 
     // to enforce re-render to the component to change the complete status

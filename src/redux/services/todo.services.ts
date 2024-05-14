@@ -1,7 +1,7 @@
 // importing all requirements
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API_URL } from '.';
-import { AddToDo, PrimaryToDoState, ToDo, ToDoId, UserId } from '../features/interfaces';
+import { AddToDo, PrimaryToDoState, ToDo, ToDoId } from '../features/interfaces';
 
 
 // create a reducer to fetch all the todos
@@ -51,42 +51,6 @@ const deleteToDo = createAsyncThunk<ToDoId, ToDoId>('todo/delete', async (id: To
 
         // if this work
         return id;
-
-    } catch (error) {
-
-        // when encountered errors
-        console.error("Error(todos/fetch): ", error);
-        throw error;
-    }
-});
-
-
-// to update the existing todos
-const updateToDo = createAsyncThunk<ToDo, ToDo>('todo/update', async (todo: ToDo) => {
-    try {
-        // api to make the update request
-        const url = `${API_URL}/todos/${todo.id}`;
-
-        const config = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(todo),
-        }
-
-        // now, make the api call to update the todo
-        const response = await fetch(url, config);
-
-        // handling non-ok responses
-        if (!response.ok) throw new Error('Failed to update');
-
-        // now, parse the response as json and return the required data
-        const data = await response.json();
-
-        // -------------------------- update later
-        console.log(data);
-        return data;
 
     } catch (error) {
 

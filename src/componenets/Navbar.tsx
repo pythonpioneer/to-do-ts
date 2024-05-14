@@ -13,9 +13,9 @@ const Navbar: React.FC<NavbarProps> = () => {
         <>
             {/* Navbar heading as link */}
             <nav className="navbar navbar-light bg-light sticky-top">
-                <a className="navbar-brand" href="#" style={{ fontWeight: 'bold' }}>
-                    Navbar
-                </a>
+                <Link className="navbar-brand" to="/" style={{ fontWeight: 'bold' }}>
+                    ToDo
+                </Link>
 
                 {/* to add new task */}
                 <Link className="float-right" to="/add">
