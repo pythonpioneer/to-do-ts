@@ -9,7 +9,7 @@ import { ToDoState } from "../redux/features/interfaces";
 const Container: React.FC = () => {
 
     // to call the actions and to select states
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const { todos } = useSelector((state: { todo: ToDoState }) => state.todo);
 
     // Chunk the todos into groups of three
@@ -18,10 +18,14 @@ const Container: React.FC = () => {
         chunkedTodos.push(todos.slice(i, i + 3));
     }
 
-    // to fetch all todos
-    useEffect(() => {
-        dispatch(fetchAllToDos() as any);
-    }, [dispatch]);
+    // // to fetch all todos
+    // useEffect(() => {
+    //     dispatch(fetchAllToDos() as any);
+        
+    //     return () => {
+    //         console.log("effect return")
+    //     }
+    // }, [dispatch]);
 
     console.log("container")
 
