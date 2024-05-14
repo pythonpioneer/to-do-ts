@@ -26,7 +26,7 @@ const Item: React.FC<ToDo> = (props) => {
         dispatch(markComplete(id));
     }
 
-    console.log("xxx")
+    console.log("items")
     return (
         <>
             <div className="card m-1" style={{ width: "18rem" }}>

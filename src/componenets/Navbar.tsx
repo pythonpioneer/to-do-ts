@@ -9,6 +9,9 @@ interface NavbarProps {
 
 
 const Navbar: React.FC<NavbarProps> = () => {
+    
+    console.log("navbar")
+
     return (
         <>
             {/* Navbar heading as link */}

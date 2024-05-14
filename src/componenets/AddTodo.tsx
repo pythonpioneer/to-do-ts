@@ -40,6 +40,8 @@ const AddToDo: React.FC = () => {
             });
     }
 
+    console.log("add-todo")
+
     return (
         <>
             <form onSubmit={handleSubmit}>
