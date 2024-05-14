@@ -1,7 +1,7 @@
 // importing all requirements
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ToDo, ToDoState, ToDoId, PrimaryToDoState } from "./interfaces";
-import { deleteToDo, fetchAllToDos } from "../services/todo.services";
+import { deleteToDo, fetchAllToDos, addToDo } from "../services/todo.services";
 
 
 // create the initial global state for the todo
@@ -18,12 +18,6 @@ const ToDoSlice = createSlice({
     name: "todo",
     initialState,
     reducers: {
-
-        // adding a new todo on the top of other todos, also increment the total.
-        addToDo: (state, action: PayloadAction<ToDo>) => {
-            state.todos = [ action.payload, ...state.todos ];
-            state.total += 1;
-        },
 
         // remove a todo, also decrement the total
         removeToDo: (state, action: PayloadAction<ToDoId>) => {
@@ -73,6 +67,16 @@ const ToDoSlice = createSlice({
                     type: ""
                 });
             })
+
+            // to add a new todo
+            .addCase(addToDo.fulfilled, (state, action: PayloadAction<ToDo>) => {
+
+                console.log(action.payload)
+
+                // add the todo in the state todo arr
+                state.todos = [ action.payload, ...state.todos ];
+                state.total += 1;
+            })
     }
 });
 
@@ -80,7 +84,6 @@ const ToDoSlice = createSlice({
 // now, export all the available actions and reducers
 export default ToDoSlice.reducer;
 export const { 
-    addToDo, 
     removeToDo,
     markComplete
 } = ToDoSlice.actions;

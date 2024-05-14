@@ -1,13 +1,16 @@
 // importing requirements
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { addToDo } from "../redux/services/todo.services";
 
 
 // form to add todo
 const AddToDo: React.FC = () => {
 
     // to navigate to pages
-    const navigate = useNavigate();
+    const navigate: ReturnType<typeof useNavigate> = useNavigate();
+    const dispatch = useDispatch();
 
     // handle the prev page 
     const goToPrevPage = () => {
@@ -22,7 +25,18 @@ const AddToDo: React.FC = () => {
         const formData = new FormData(e.currentTarget);
         const textareaValue = formData.get("todo") as string;
 
-        console.log(textareaValue)
+        // picking a random userid
+        const userId = Math.floor(Math.random() * 29) + 1
+
+        // to dispatch the addTodo action
+        dispatch(addToDo({ todo: textareaValue, userId: userId }) as any)
+            .then((action: { type: string; }) => {
+                
+                if (action.type = 'addToDo/fulfilled') navigate(-1);
+            })
+            .catch(() => {
+                alert("Something Went Wrong!");
+            });
     }
 
     return (
