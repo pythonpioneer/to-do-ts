@@ -1,7 +1,7 @@
 // importing all requirements
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { API_URL } from '.';
-import { PrimaryToDoState, ToDo, ToDoId } from '../features/interfaces';
+import { AddToDo, PrimaryToDoState, ToDo, ToDoId, UserId } from '../features/interfaces';
 
 
 // create a reducer to fetch all the todos
@@ -10,7 +10,7 @@ const fetchAllToDos = createAsyncThunk<PrimaryToDoState>('todos/fetch', async ()
 
         // API to make the request to fetch all notes, (offset based pagination enabled) (default pagination values passed/not required)
         const url = `${API_URL}/todos?limit=0`;
-        
+
         // now, make the request and fetch todos
         const response = await fetch(url);
 
@@ -51,9 +51,9 @@ const deleteToDo = createAsyncThunk<ToDoId, ToDoId>('todo/delete', async (id: To
 
         // if this work
         return id;
-        
+
     } catch (error) {
-        
+
         // when encountered errors
         console.error("Error(todos/fetch): ", error);
         throw error;
@@ -64,7 +64,7 @@ const deleteToDo = createAsyncThunk<ToDoId, ToDoId>('todo/delete', async (id: To
 // to update the existing todos
 const updateToDo = createAsyncThunk<ToDo, ToDo>('todo/update', async (todo: ToDo) => {
     try {
-        // api to make the delete request
+        // api to make the update request
         const url = `${API_URL}/todos/${todo.id}`;
 
         const config = {
@@ -97,6 +97,42 @@ const updateToDo = createAsyncThunk<ToDo, ToDo>('todo/update', async (todo: ToDo
 });
 
 
+// to add a new todo
+const addToDo = createAsyncThunk<ToDo, AddToDo>('todo/create', async ({ todo, userId }) => {
+    try {
+        // api to make the delete request
+        const url = `${API_URL}/todos/add`;
+
+        // configuration to make the post request to add todo
+        const config = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                todo: todo,
+                completed: false,
+                userId: userId,
+            })
+        };
+
+        // now, make the api call to add a todo
+        const response = await fetch(url, config);
+
+        // handling non-ok responses
+        if (!response.ok) throw new Error('Failed to update');
+
+        // now, parse the response as json and return the required data
+        const data = await response.json();
+
+        return data;
+
+    } catch (error) {
+        // when encountered errors
+        console.error("Error(todos/fetch): ", error);
+        throw error;
+    }
+})
+
+
 
 // export all the availbale todos
-export { fetchAllToDos, deleteToDo };
+export { fetchAllToDos, deleteToDo, addToDo };

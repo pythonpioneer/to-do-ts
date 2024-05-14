@@ -22,6 +22,9 @@ interface ToDoState extends PrimaryToDoState {
     hasError: boolean;
 }
 
+// create an interface to add a todo, including fields todo and userID
+type AddToDo = Pick<ToDo, 'todo' | 'userId'>;
+
 
 // now export all the available interfaces
-export type { ToDo, PrimaryToDoState, ToDoState, ToDoId, UserId };
+export type { ToDo, PrimaryToDoState, ToDoState, ToDoId, UserId, AddToDo };
